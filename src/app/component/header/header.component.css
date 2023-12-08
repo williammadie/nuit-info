@@ -4,6 +4,7 @@
   padding: 1rem;
   transition: 0.5s;
   transform: scale(1);
+  height: 7vh;
 
   & nav {
     display: flex;
