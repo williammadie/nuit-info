@@ -1,0 +1,19 @@
+<div class="quiz-container">
+  <app-card-quiz
+    *ngIf="currentQuestionIndex < questions.length"
+    [question]="questions[currentQuestionIndex]"
+    (answerSelected)="onAnswerSelected($event)">
+  </app-card-quiz>
+  <div
+    class="explanation"
+    [style.background-color]="backgroundColor"
+    *ngIf="isAnswerSelectedForCurrentQuestion">
+    {{questions[currentQuestionIndex].explanation}}
+  </div>
+  <button
+    *ngIf="isAnswerSelectedForCurrentQuestion"
+    (click)="nextQuestion()"
+    class="next-button">
+    Suivant
+  </button>
+</div>
