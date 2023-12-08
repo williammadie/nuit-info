@@ -4,6 +4,7 @@ import {PossibleAnswer} from "../../model/possibleAnswer.model";
 import {NgForOf, NgIf} from "@angular/common";
 import {CardQuizComponent} from "../card-quiz/card-quiz.component";
 import {QuizService} from "../services/quiz.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-quiz',
@@ -21,13 +22,18 @@ export class QuizComponent {
   backgroundColor = 'transparent';
   currentQuestionIndex = 0;
   isAnswerSelectedForCurrentQuestion = false;
+  cptGoodAnswer = 0;
 
-  constructor(private quizService : QuizService) {
+  constructor(private quizService : QuizService,private _snackBar: MatSnackBar) {
     this.questions = this.quizService.questions;
   }
 
   onAnswerSelected(event: { isCorrect: boolean }): void {
-    this.backgroundColor = event.isCorrect ? '#A6FA8FFF' : '#FD7272FF'
+    if (event.isCorrect){
+      this.backgroundColor =  '#A6FA8FFF';
+      this.cptGoodAnswer++;
+    }else
+      this.backgroundColor = '#FD7272FF';
     this.isAnswerSelectedForCurrentQuestion = true;
   }
 
@@ -35,6 +41,16 @@ export class QuizComponent {
     if (this.currentQuestionIndex < this.questions.length - 1) {
       this.currentQuestionIndex++;
       this.isAnswerSelectedForCurrentQuestion = false; // Réinitialiser pour la nouvelle question
+    }else{
+      const messageFin =
+        this.cptGoodAnswer > this.questions.length / 2
+          ? 'Bien joué !'
+          : 'Dommage, essaye encore !';
+
+      this._snackBar.open(
+        `${this.cptGoodAnswer}/${this.questions.length} bonne(s) réponse(s) - ${messageFin}`,
+        'Fermer'
+      );
     }
   }
 }
