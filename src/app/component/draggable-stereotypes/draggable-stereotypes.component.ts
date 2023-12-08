@@ -20,11 +20,11 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class DraggableStereotypesComponent {
   standbyItems: Array<StereotypeQuote> = [
-    new StereotypeQuote(
-      'La France doit faire sa part des choses',
-      true,
-      'Tous les pays sont concernés par le changement climatique.'
-    ),
+      new StereotypeQuote(
+        'La France doit faire sa part des choses',
+        true,
+        'Tous les pays sont concernés par le changement climatique.'
+      ),
     new StereotypeQuote(
       'Le nucléaire est une énergie de transition',
       true,
@@ -39,7 +39,36 @@ export class DraggableStereotypesComponent {
       "C'est d'abord aux autres d'agir",
       false,
       "L'individualisme est un des principaux facteurs d'inaction climatique."
+    ),new StereotypeQuote(
+      "Le climat c'est l'étude scientifique des phénomènes atmosphériques",
+      false,
+      'Voir question d\'après'
     ),
+
+    new StereotypeQuote(
+      "Le climat c'est l'ensemble des éléments qui caractérisent l'état moyen de l'atmosphère étudié sur le long terme",
+      true,
+      ''
+    ),
+
+    new StereotypeQuote(
+      'La France ne fait pas partie des 20 premiers pays impacté par le changement climatique?',
+      false,
+      'La France est le 18ème pays le plus impacté par le changement climatique.'
+    ),
+
+    new StereotypeQuote(
+      "Le soleil n'est pas le premier responsable du changement climatique.",
+      true,
+      "Le changement climatique est lié à l'effet de serre. L'activité humaine dérègle l'équilibre de cet effet de serre naturel, provoquant alors une augmentation de la température moyenne sur Terre."
+    ),
+
+    new StereotypeQuote(
+      "Le réchauffement climatique c'est : 'Les modifications du climat accompagnées d'une augmentation générale des températures moyennes à un niveau mondial'.",
+      false,
+      'Nous parlons de changement climatique.'
+    )
+
   ];
   trueItems: Array<StereotypeQuote> = [];
   falseItems: Array<StereotypeQuote> = [];
