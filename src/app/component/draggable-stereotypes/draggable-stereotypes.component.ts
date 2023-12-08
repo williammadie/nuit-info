@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -11,6 +11,7 @@ import StereotypeQuote from '../../model/StereotypeQuote';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
+
 @Component({
   selector: 'app-draggable-stereotypes',
   standalone: true,
@@ -18,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './draggable-stereotypes.component.html',
   styleUrl: './draggable-stereotypes.component.css',
 })
-export class DraggableStereotypesComponent {
+export class DraggableStereotypesComponent implements OnDestroy{
   standbyItems: Array<StereotypeQuote> = [
       new StereotypeQuote(
         'La France doit faire sa part des choses',
@@ -143,4 +144,10 @@ export class DraggableStereotypesComponent {
     this.itemsToDetail = [];
     this.isDisplayingExplanations = !this.isDisplayingExplanations;
   }
+
+  ngOnDestroy(): void {
+    this._snackBar.dismiss()
+  }
+
+
 }
