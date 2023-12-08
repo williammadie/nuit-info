@@ -1,0 +1,54 @@
+<h1>Tri de stéréotypes  </h1>
+
+<div class="game-area">
+    <div
+        class="standby-area drop-zone"
+        cdkDropList
+        #standbyList="cdkDropList"
+        [cdkDropListData]="standbyItems"
+        [cdkDropListConnectedTo]="[falseList, trueList]"
+        (cdkDropListDropped)="drop($event)">
+        <h2>À trier</h2>
+        @for (item of standbyItems; track item) {
+            <div class="stereotype-card" cdkDrag>{{item.quote}}</div>
+        }
+    </div>
+    <div class="true-area drop-zone"
+        cdkDropList
+        #trueList="cdkDropList"
+        [cdkDropListData]="trueItems"
+        [cdkDropListConnectedTo]="[standbyList, falseList]"
+        (cdkDropListDropped)="drop($event)">
+        <h2>Propositions vraies</h2>
+        @for (item of trueItems; track item) {
+            <div class="stereotype-card" cdkDrag>{{item.quote}}</div>
+        }
+    </div>
+    <div class="false-area drop-zone"
+        cdkDropList
+        #falseList="cdkDropList"
+        [cdkDropListData]="falseItems"
+        [cdkDropListConnectedTo]="[standbyList, trueList]"
+        (cdkDropListDropped)="drop($event)">
+        <h2>Propositions fausses</h2>
+        @for (item of falseItems; track item) {
+            <div class="stereotype-card" cdkDrag>{{item.quote}}</div>
+        }
+    </div>
+</div>
+
+<button (click)="checkAnswers()">Afficher le score</button>
+<button *ngIf="!isDisplayingExplanations" (click)="showExplanations()">Afficher les réponses</button>
+<button *ngIf="isDisplayingExplanations" (click)="hideExplanations()">Cacher les réponses</button>
+
+<div class="answer-details">
+    <div *ngFor="let item of itemsToDetail" class="answer-detail-item">
+        <div class="item-header">
+            <div class="item-header-icon-wrapper">
+                <mat-icon aria-hidden="false" aria-label="Info icon" fontIcon="info" class="item-header-icon"></mat-icon>
+            </div>
+            <p class="header-text">{{ item.quote }}</p>
+        </div>
+        <p class="detail-text">{{ item.explanation }}</p>
+    </div>
+</div>
